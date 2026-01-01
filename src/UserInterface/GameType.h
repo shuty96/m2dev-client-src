@@ -44,6 +44,15 @@ const DWORD c_Equipment_Count = 12;
 
 const DWORD c_Equipment_Start = c_ItemSlot_Count;
 
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+const DWORD INVENTORY_OPEN_KEY_VNUM = 72319;
+const DWORD INVENTORY_OPEN_KEY_VNUM2 = 72320;
+const DWORD c_Inventory_Open_Page_Count = 2;
+const DWORD c_Inventory_Locked_Page_Count = c_Inventory_Page_Count-c_Inventory_Open_Page_Count;
+const DWORD c_Inventory_Need_Key_Start = 2;
+const DWORD c_Inventory_Need_Key_Increase = 3;
+#endif
+
 const DWORD c_Equipment_Body = c_Equipment_Start + CItemData::WEAR_BODY;
 const DWORD c_Equipment_Head = c_Equipment_Start + CItemData::WEAR_HEAD;
 const DWORD c_Equipment_Shoes = c_Equipment_Start + CItemData::WEAR_FOOTS;

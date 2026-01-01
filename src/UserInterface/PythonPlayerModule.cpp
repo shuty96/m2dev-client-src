@@ -2171,6 +2171,23 @@ PyObject* playerSendDragonSoulRefine(PyObject* poSelf, PyObject* poArgs)
 	
 	return Py_BuildNone();
 }
+
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+PyObject * playerGetEnvanter(PyObject* poSelf, PyObject* poArgs)
+{
+	return Py_BuildValue("i", CPythonPlayer::Instance().GetStatus(POINT_BLACK));
+}
+PyObject * playerIsExInvenKey(PyObject* poSelf, PyObject* poArgs)
+{
+	int vnum;
+	if (!PyTuple_GetInteger(poArgs, 0,&vnum))
+		return Py_BuildException();
+	if (vnum == INVENTORY_OPEN_KEY_VNUM || vnum == INVENTORY_OPEN_KEY_VNUM2)
+		return Py_BuildValue("i", TRUE);
+	return Py_BuildValue("i", FALSE);
+}
+#endif
+
 void initPlayer()
 {
 	static PyMethodDef s_methods[] =
@@ -2338,7 +2355,10 @@ void initPlayer()
 		{ "GetItemLink",				playerGetItemLink,					METH_VARARGS },
 		{ "SlotTypeToInvenType",		playerSlotTypeToInvenType,			METH_VARARGS },
 		{ "SendDragonSoulRefine",		playerSendDragonSoulRefine,			METH_VARARGS },
-
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+		{ "GetExtendInvenStage",		playerGetEnvanter,					METH_VARARGS },
+		{ "IsExtendInvenKey",			playerIsExInvenKey,					METH_VARARGS },
+#endif
 		{ NULL,							NULL,								NULL },
 	};
 
@@ -2572,5 +2592,10 @@ void initPlayer()
 	PyModule_AddIntConstant(poModule, "DS_SUB_HEADER_DO_UPGRADE",	DS_SUB_HEADER_DO_UPGRADE);
 	PyModule_AddIntConstant(poModule, "DS_SUB_HEADER_DO_IMPROVEMENT",	DS_SUB_HEADER_DO_IMPROVEMENT);
 	PyModule_AddIntConstant(poModule, "DS_SUB_HEADER_DO_REFINE",	DS_SUB_HEADER_DO_REFINE);
-
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+	PyModule_AddIntConstant(poModule, "INVENTORY_OPEN_PAGE_COUNT",	c_Inventory_Open_Page_Count);
+	PyModule_AddIntConstant(poModule, "INVENTORY_LOCKED_PAGE_COUNT",c_Inventory_Locked_Page_Count);
+	PyModule_AddIntConstant(poModule, "INVENTORY_NEED_KEY_START",c_Inventory_Need_Key_Start);
+	PyModule_AddIntConstant(poModule, "INVENTORY_NEED_KEY_INCREASE",c_Inventory_Need_Key_Increase);
+#endif	
 }

@@ -1675,6 +1675,15 @@ PyObject* netRegisterErrorLog(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+PyObject* netEnvanterpaketi(PyObject* poSelf, PyObject* poArgs)
+{	
+	CPythonNetworkStream& rkNetStream=CPythonNetworkStream::Instance();
+	rkNetStream.Envanter_paketi();
+	return Py_BuildNone();
+}
+#endif
+
 void initnet()
 {
 	static PyMethodDef s_methods[] =
@@ -1837,6 +1846,10 @@ void initnet()
 
 		// Log
 		{ "RegisterErrorLog",						netRegisterErrorLog,						METH_VARARGS },
+
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+		{ "Envanter_genislet",						netEnvanterpaketi,							METH_VARARGS },
+#endif
 
 		{ NULL,										NULL,										NULL },
 	};

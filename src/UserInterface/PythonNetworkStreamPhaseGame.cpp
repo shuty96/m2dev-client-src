@@ -4525,3 +4525,22 @@ void CPythonNetworkStream::Discord_Close()
 	Discord_Shutdown();
 }
 #endif
+
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+bool CPythonNetworkStream::Envanter_paketi()
+{
+	if (!__CanActMainInstance())
+		return true;
+
+	TPacketCGEnvanter envanterpaketi;
+	envanterpaketi.header = ENVANTER_BLACK;
+
+	if (!Send(sizeof(envanterpaketi), &envanterpaketi))
+	{
+		Tracen("Error system->[Inventory-Expansion]");
+		return false;
+	}
+
+	return SendSequence();
+}
+#endif

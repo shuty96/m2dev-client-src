@@ -29,7 +29,10 @@ enum
 	HEADER_CG_QUICKSLOT_DEL                     = 17,
 	HEADER_CG_QUICKSLOT_SWAP                    = 18,
 	HEADER_CG_WHISPER							= 19,
-	HEADER_CG_ITEM_DROP2                        = 20,	
+	HEADER_CG_ITEM_DROP2                        = 20,
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+	ENVANTER_BLACK		            			= 23,
+#endif
 	//HEADER_BLANK21								= 21,
 	//HEADER_BLANK22								= 22,
 	//HEADER_BLANK22								= 23,
@@ -1581,7 +1584,9 @@ enum EPointTypes
 	POINT_MIN_MAGIC_WEP,
 	POINT_MAX_MAGIC_WEP,
 	POINT_HIT_RATE,
-
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+	POINT_BLACK = 145,
+#endif
 
     //POINT_MAX_NUM = 255,=>stdafx.h 로/
 };
@@ -2606,5 +2611,12 @@ typedef struct SChannelStatus
 	int16_t nPort;
 	uint8_t bStatus;
 } TChannelStatus;
+
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+typedef struct envanter_paketi
+{
+	BYTE		header;
+} TPacketCGEnvanter;
+#endif
 
 #pragma pack(pop)

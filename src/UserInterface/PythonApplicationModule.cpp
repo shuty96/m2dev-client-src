@@ -1386,4 +1386,10 @@ void initapp()
 #else
 	PyModule_AddIntConstant(poModule, "ENABLE_NEW_EQUIPMENT_SYSTEM",	0);
 #endif
+
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+	PyModule_AddIntConstant(poModule, "ENABLE_EXTEND_INVEN_SYSTEM",	1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_EXTEND_INVEN_SYSTEM",	0);
+#endif
 }
